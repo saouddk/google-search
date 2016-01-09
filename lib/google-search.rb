@@ -23,6 +23,7 @@
 
 require 'json'
 require 'open-uri'
+require 'the_mask'
 require 'google-search/version'
 require 'google-search/item'
 require 'google-search/response'

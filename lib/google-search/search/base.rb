@@ -63,6 +63,11 @@ module Google
     #
     
     attr_accessor :size
+
+    ##
+    # mask_connect. Defaults to a new TheMask::Connect object
+
+    attr_accessor :mask_connect
     
     ##
     # Additional options. All those listed above
@@ -84,6 +89,7 @@ module Google
       @language = options.delete(:language) || :en
       @query = options.delete(:query)
       @api_key = options.delete(:api_key) || :notsupplied
+      @mask_connect = options.delete(:mask_connect) || TheMask::Connect.new
       @options = options
       raise Error, 'Do not initialize Google::Search; Use a subclass such as Google::Search::Web' if @type == :search
       yield self if block
@@ -152,7 +158,7 @@ module Google
     
     def get_raw
       @sent = true
-      open(get_uri).read
+      @mask_connect.open_url(get_uri)
     end
     
     ##
